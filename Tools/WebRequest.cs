@@ -17,29 +17,27 @@ namespace VisualChatBot.Tools
                 client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apikey}");
                 var response = await client.PostAsync(requestUrl, input);
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var responType = new HttpGetModel();
-                responType = JsonConvert.DeserializeObject<HttpGetModel>(responseContent);
+                var responType = JsonConvert.DeserializeObject<HttpGetModel>(responseContent);
                 if (response.IsSuccessStatusCode == false)
                 {
                     HttpGetModel.IsRequestSuccess = false;
-                    if (responType.error.code == "invalid_api_key")
-                    {
-                        HttpGetModel.IsValidApiKey = false;
-                        return $"#Api_Key无效";
-                    }
-                    else if (responType.error.message == "you must provide a model parameter")
-                    {
-                        HttpGetModel.IsValidApiKey = true;
-                    }
-                    string errorInfo = $"#错误类型：{responType.error.type}\n#错误内容：{responType.error.message}";
+                    string errorInfo = $"#发生错误,Log: IsSuccessStatusCode == false";
                     return errorInfo;
                 }
                 else
                 {
+                    if (responseContent.Contains("\"error\":true"))
+                    {
+                        ErrorStateModel errorState = JsonConvert.DeserializeObject<ErrorStateModel>(responseContent);
+                        if (null != errorState)
+                        {
+                            return errorState.raw;
+                        }
+                    }
                     HttpGetModel.IsRequestSuccess = true;
                     HttpGetModel.IsValidApiKey = true;
                     // 返回接收到的内容
-                    return await Task.FromResult(result: responType?.Choicese?.First().MessageDetail.content);
+                    return await Task.FromResult(result: responType?.choices[0].message.content);
                 }
             }
             catch (Exception ex)

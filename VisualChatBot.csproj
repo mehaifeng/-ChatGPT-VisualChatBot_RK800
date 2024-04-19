@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <BaseOutputPath>bin\</BaseOutputPath>
@@ -10,22 +9,17 @@
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <ApplicationIcon>artificial-removebg-preview.ico</ApplicationIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Assets\Fonts\iconfont.ttf" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="artificial-removebg-preview.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview3" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="Assets\Fonts\iconfont.ttf" />
   </ItemGroup>
-
 </Project>

@@ -38,7 +38,7 @@ namespace VisualChatBot.ViewModels
         /// <summary>
         /// API地址
         /// </summary>
-        string urlAddress = $"https://api.openai.com/v1/chat/completions";
+        string urlAddress = $"https://api.nextapi.fun/v1/chat/completions";
         /// <summary>
         /// 是否处于发送状态
         /// </summary>

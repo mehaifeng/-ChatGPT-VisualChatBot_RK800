@@ -16,58 +16,40 @@ namespace VisualChatBot.Models
         [JsonIgnore]
         public static bool IsRequestSuccess { get; set; }
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
-        [JsonProperty("object")]
-        public string? Object { get; set; }
-
-        [JsonProperty("created")]
-        public string? Created { get; set; }
-
-        [JsonProperty("model")]
-        public string? Model { get; set; }
-
         [JsonProperty("choices")]
-        public List<Choices>? Choicese { get; set; }
-
+        public List<Choice> choices { get; set; }
+        [JsonProperty("created")]
+        public int created { get; set; }
+        [JsonProperty("id")]
+        public string id { get; set; }
+        [JsonProperty("model")]
+        public string model { get; set; }
+        [JsonProperty("object")]
+        public string @object { get; set; }
         [JsonProperty("usage")]
-        public Usage? Usages { get; set; }
+        public Usage usage { get; set; }
+        [JsonProperty("system_fingerprint")]
+        public string system_fingerprint { get; set; }
 
-        [JsonProperty("error")]
-        public ErrorInfo? error { get; set; }
-
-        public class Choices
+        public class Choice
         {
-            [JsonProperty("message")]
-            public Message MessageDetail { get; set; }
             [JsonProperty("finish_reason")]
-            public string Finish_reason { get; set; }
+            public string finish_reason { get; set; }
             [JsonProperty("index")]
             public int index { get; set; }
+            [JsonProperty("message")]
+            public Message message { get; set; }
+            [JsonProperty("logprobs")]
+            public object logprobs { get; set; }
         }
         public class Usage
         {
-            [JsonProperty("prompt_tokens")]
-            public string? Prompt_tokens { get; set; }
             [JsonProperty("completion_tokens")]
-            public string? Completion_tokens { get; set; }
+            public int completion_tokens { get; set; }
+            [JsonProperty("prompt_tokens")]
+            public int prompt_tokens { get; set; }
             [JsonProperty("total_tokens")]
-            public string? Total_tokens { get; set; }
-        }
-        public class ErrorInfo
-        {
-            [JsonProperty("message")]
-            public string? message { get; set; }
-
-            [JsonProperty("type")]
-            public string? type { get; set; }
-
-            [JsonProperty("param")]
-            public string? param { get; set; }
-
-            [JsonProperty("code")]
-            public string? code { get; set; }
+            public int total_tokens { get; set; }
         }
     }
 }
